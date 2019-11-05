@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
 import gc # garbage collector
 
 # import functions to call them later
-os.chdir("/home/jovyan/PYTHON/DNN_ESANN")
+os.chdir("/home/jovyan/DNN_ESANN")
 import read_and_process_audmat
 
 # define parameters
