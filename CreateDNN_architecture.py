@@ -15,7 +15,7 @@ nfreqs = 99
 batch_size = 32 # a parameter of gradient descent that controls the number of training samples to work through 
                 # before the model's internal parameters are updated
 epoch_nr = 100 # number of epochs to train the model, an epoch is an iteration over the entire x and y data
-adam = optimizers.Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, amsgrad=False) # optimizer with default settings
+#adam = optimizers.Adam(learning_rate=0.001, beta_1=0.9, beta_2=0.999, amsgrad=False) # optimizer with default settings
 
 # model left channel
 in1 = layers.Input(shape=(time_sound,nfreqs,1)) # define input (rows, columns, channels (only one in my case))
@@ -50,7 +50,7 @@ predicted_coords = layers.Dense(2, activation = 'linear')(model_final_dropout)
 model = models.Model(inputs = [in1,in2], outputs = predicted_coords)
 
 # compile model
-model.compile(loss = 'mean_squared_error', optimizer = adam, metrics=['mse'])
+model.compile(loss = 'mean_squared_error', optimizer = optimizers.Adam(), metrics=['mse'])
 
 model.summary()
 model.save(dir_wrfiles+'/DNN_model1.h5') # save model
