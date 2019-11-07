@@ -12,6 +12,10 @@ from sklearn.model_selection import train_test_split
 import gc # garbage collector
 from pytictoc import TicToc 
 t = TicToc() # create instant of class
+import seaborn as sns
+
+# set parameters
+testset = 0.15
 
 t.tic()
 # load numpy arrays from disk
@@ -30,7 +34,7 @@ del an_r
 gc.collect() # collect garbage to save memory
 
 # create a train and test split
-labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = train_test_split(labels_rand, an_l_rand, an_r_rand, test_size = 0.15, shuffle = False)
+labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = train_test_split(labels_rand, an_l_rand, an_r_rand, test_size = testset, shuffle = False)
 
 # clean memory
 del labels_rand
@@ -38,9 +42,16 @@ del an_l_rand
 del an_r_rand
 gc.collect()
 
+# add a fourth dimension ('channel') to train_an_l and train_an_r which should be 1, this is needed for the input to the DNN
+an_l_rand_train = np.expand_dims(an_l_rand_train,axis = 3)
+an_l_rand_test = np.expand_dims(an_l_rand_test,axis = 3)
+an_r_rand_train = np.expand_dims(an_r_rand_train,axis = 3)
+an_r_rand_test = np.expand_dims(an_r_rand_test,axis = 3)
+
 print("Shape of training sounds is:", an_l_rand_train.shape)
 print("Shape of training labels is:", labels_rand_train.shape)
 
 print("Shape of test sounds is:", an_l_rand_test.shape)
 print("Shape of test labels is:", labels_rand_test.shape)
 
+sns.countplot(labels_rand_train[:,0])
