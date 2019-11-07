@@ -30,7 +30,7 @@ t.toc("scanning files took")
 print("this folder contains" , countfiles, "files" )
 
 t.tic()
- # create array of location labels for the x and y coordinates. labels range from -1 to 1 in correspondence with the unit circle 
+# create array of location labels for the x and y coordinates. labels range from -1 to 1 in correspondence with the unit circle 
 # take labels from directory for left channel but they are the same for the left and right channel
 trainlabels_x = [] # initialize array of labels
 trainlabels_y = []
@@ -46,10 +46,7 @@ with os.scandir(dir_anfiles) as listfiles:
         temp_xcoord = math.cos(math.radians(temploc)) # math.cos operates on radians so convert angle to rad first
         temp_ycoord = math.sin(math.radians(temploc))
         trainlabels_x.append(temp_xcoord)
-        trainlabels_y.append(temp_ycoord)
-        #print(entry.name) # use this to display all file names
-        #print(temploc) 
-        #print(trainlabels)   
+        trainlabels_y.append(temp_ycoord) 
 # add together in 2D array where column 1 = x coord and column 2 = y coord
 trainlabels = np.vstack((np.array(trainlabels_x),np.array(trainlabels_y)))
 trainlabels = np.transpose(trainlabels)

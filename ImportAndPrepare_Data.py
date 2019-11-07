@@ -3,26 +3,24 @@
 
 # define directories, add r before the name because a normal string cannot be used as a path, alternatives are 
 # using / or \\ instead of \
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # sounds left channel
+dir_anfiles = "/home/jovyan/Data" # sounds left channel
 
 # import packages and libraries
-import os # to get info about directories
+import numpy as np
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
 import gc # garbage collector
+from pytictoc import TicToc 
+t = TicToc() # create instant of class
 
-# import functions to call them later
-os.chdir("/home/jovyan/DNN_ESANN")
-import read_and_process_audmat
+t.tic()
+# load numpy arrays from disk
+an_l = np.load(dir_anfiles+"/an_l.npy")
+an_r = np.load(dir_anfiles+"/an_r.npy")
+labels = np.load(dir_anfiles+"/trainlabels.npy")
+t.toc("loading the numpy arrays took ")
 
-# define parameters
-time_sound = 2000 # time dimension of sound files, i.e. number of samples
-nfreqs     = 99 # nr of freqs used
-
-# returns trainlabels (2d array with first column = x coord and 2nd column = y coord, and AN representation left and right)
-labels, an_l, an_r = read_and_process_audmat.audmat(dir_anfiles, time_sound, nfreqs)
-
-# shuffle data in the same way
+# shuffle all arrays in the same way
 labels_rand, an_l_rand, an_r_rand = shuffle(labels, an_l, an_r, random_state = 0)
 
 # if shuffling is  OK, remove unused variables from memory
@@ -41,5 +39,8 @@ del an_r_rand
 gc.collect()
 
 print("Shape of training sounds is:", an_l_rand_train.shape)
-print("Shape of training sounds is:", an_r_rand_train.shape)
 print("Shape of training labels is:", labels_rand_train.shape)
+
+print("Shape of test sounds is:", an_l_rand_test.shape)
+print("Shape of test labels is:", labels_rand_test.shape)
+
