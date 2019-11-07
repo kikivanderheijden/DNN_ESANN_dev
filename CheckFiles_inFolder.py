@@ -61,8 +61,8 @@ fileidx = 0
 countfilesdone = 0
 countfiles100 = 0
 # find and read files
-train_an_l = []
-train_an_r = []
+train_an_l = [None]*trainlabels.shape[0] #intialize list
+train_an_r = [None]*trainlabels.shape[0]
 #train_an_l = np.empty([1,time_sound,nfreqs]) # note that in a 3d array, the first dimension specificies the matrix, the second row, 
                                            # and the third column, and remember that all indices start at 0!!!!
 #train_an_r = np.empty([1,time_sound,nfreqs]) # note that in a 3d array, the first dimension specificies the matrix, the second row, 
