@@ -55,6 +55,6 @@ def im_and_prep():
     print("Shape of test sounds is:", an_l_rand_test.shape)
     print("Shape of test labels is:", labels_rand_test.shape)
     
-    sns.countplot(labels_rand_train[:,0])
+    #sns.countplot(labels_rand_train[:,0])
     
     return labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test
