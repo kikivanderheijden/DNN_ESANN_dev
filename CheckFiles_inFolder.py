@@ -7,8 +7,13 @@ dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # sounds left channel
 import os # to get info about directories
 import numpy as np
 import math
-from pytictoc import TicToc
-t = TicToc() # create instant of class
+from pytictoc import TicToc as t
+from scipy.io import loadmat
+
+# set parameters
+time_sound = 2000 # time dimension of sound files, i.e. number of samples
+nfreqs     = 99 # nr of freqs used
+
 
 t.tic()
 countfiles = 0
@@ -47,4 +52,26 @@ trainlabels = np.vstack((np.array(trainlabels_x),np.array(trainlabels_y)))
 trainlabels = np.transpose(trainlabels)
 
 t.toc("creating the train labels took")
-print("shape of training sounds is ", trainlabels.shape)    
+print("shape of training labels is ", trainlabels.shape)    
+
+t.tic()
+# find and read files
+train_an_l = np.empty([1,time_sound,nfreqs]) # note that in a 3d array, the first dimension specificies the matrix, the second row, 
+                                           # and the third column, and remember that all indices start at 0!!!!
+train_an_r = np.empty([1,time_sound,nfreqs]) # note that in a 3d array, the first dimension specificies the matrix, the second row, 
+                                           # and the third column, and remember that all indices start at 0!!!!
+with os.scandir(dir_anfiles) as listfiles:
+    for entry in listfiles:
+        tempdata_l = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
+        tempdata_r = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
+        tempdata_l = np.atleast_3d(tempdata_l) # convert into 3D matrix 
+        tempdata_r = np.atleast_3d(tempdata_r) # convert into 3D matrix 
+        tempdata_l = np.reshape(tempdata_l,(1,time_sound,nfreqs)) # reshape into correct dimensions
+        tempdata_r = np.reshape(tempdata_r,(1,time_sound,nfreqs)) # reshape into correct dimensions
+        train_an_l = np.append(train_an_l,tempdata_l,axis = 0) # when arrays are same dimension, append along first dimension     
+        train_an_r = np.append(train_an_r,tempdata_r,axis = 0) # when arrays are same dimension, append along first dimension   
+                    #print(entry_r.name)
+train_an_l = train_an_l[1:] # delete first matrix which was used to initialize, keep all others
+train_an_r = train_an_r[1:] # delete first matrix which was used to initialize, keep all others
+t.toc("loading the train sounds took ")
+print("shape of training sounds is", train_an_l.shape)
