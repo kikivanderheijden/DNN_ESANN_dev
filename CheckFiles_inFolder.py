@@ -1,7 +1,7 @@
 # script to check files in folder
 
 # set directories
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN_small" # sounds left channel
+dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # sounds left channel
 
 # import necessary packages and libraries
 import os # to get info about directories
@@ -10,7 +10,6 @@ import math
 from pytictoc import TicToc 
 t = TicToc() # create instant of class
 from scipy.io import loadmat
-import gc # garbage collector
 
 # set parameters
 time_sound = 2000 # time dimension of sound files, i.e. number of samples
@@ -57,6 +56,8 @@ t.toc("creating the train labels took")
 print("shape of training labels is ", trainlabels.shape)    
 
 t.tic()
+countfilesdone = 0
+countfiles100 = 0
 # find and read files
 train_an_l = np.empty([1,time_sound,nfreqs]) # note that in a 3d array, the first dimension specificies the matrix, the second row, 
                                            # and the third column, and remember that all indices start at 0!!!!
@@ -73,9 +74,13 @@ with os.scandir(dir_anfiles) as listfiles:
         train_an_l = np.append(train_an_l,tempdata_l,axis = 0) # when arrays are same dimension, append along first dimension     
         train_an_r = np.append(train_an_r,tempdata_r,axis = 0) # when arrays are same dimension, append along first dimension   
                     #print(entry_r.name)
-        del tempdata_l 
-        del tempdata_r
-        gc.collect()
+        countfilesdone = countfilesdone+1
+        if countfilesdone == 100:
+            print("100 files done")
+            countfiles100 = countfiles100+1
+            t.toc("these 100 files took")
+            t.toc(restart=True)
+            countfilesdone = 0
 train_an_l = train_an_l[1:] # delete first matrix which was used to initialize, keep all others
 train_an_r = train_an_r[1:] # delete first matrix which was used to initialize, keep all others
 t.toc("loading the train sounds took ")
