@@ -10,6 +10,7 @@ import math
 from pytictoc import TicToc 
 t = TicToc() # create instant of class
 from scipy.io import loadmat
+import gc # garbage collector
 
 # set parameters
 time_sound = 2000 # time dimension of sound files, i.e. number of samples
@@ -72,6 +73,9 @@ with os.scandir(dir_anfiles) as listfiles:
         train_an_l = np.append(train_an_l,tempdata_l,axis = 0) # when arrays are same dimension, append along first dimension     
         train_an_r = np.append(train_an_r,tempdata_r,axis = 0) # when arrays are same dimension, append along first dimension   
                     #print(entry_r.name)
+        del tempdata_l 
+        del tempdata_r
+        gc.collect()
 train_an_l = train_an_l[1:] # delete first matrix which was used to initialize, keep all others
 train_an_r = train_an_r[1:] # delete first matrix which was used to initialize, keep all others
 t.toc("loading the train sounds took ")
