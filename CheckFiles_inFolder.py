@@ -79,7 +79,7 @@ with os.scandir(dir_anfiles) as listfiles:
 #        train_an_l = np.append(train_an_l,tempdata_l,axis = 0) # when arrays are same dimension, append along first dimension     
 #        train_an_r = np.append(train_an_r,tempdata_r,axis = 0) # when arrays are same dimension, append along first dimension   
                     #print(entry_r.name)
-#        countfilesdone = countfilesdone+1
+        countfilesdone = countfilesdone+1
         if countfilesdone == 100:
             print("100 files done")
             countfiles100 = countfiles100+1
