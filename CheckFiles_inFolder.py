@@ -7,7 +7,8 @@ dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # sounds left channel
 import os # to get info about directories
 import numpy as np
 import math
-from pytictoc import TicToc as t
+from pytictoc import TicToc 
+t = TicToc() # create instant of class
 from scipy.io import loadmat
 
 # set parameters
