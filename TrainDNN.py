@@ -3,7 +3,8 @@
 dir_fufiles = "/home/jovyan/DNN_ESANN_dev" # specify directory where function files are located
 dir_mofiles = "/home/jovyan/DNN_ESANN_dev" # specify directory where model files are located 
 
-dir_mofiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning"
+#dir_mofiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning"
+
 # import packages, libraries, functions to call them later
 #import ImportAndPrepare_Data
 from pytictoc import TicToc
