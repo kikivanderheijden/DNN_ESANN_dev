@@ -1,7 +1,7 @@
 # script to check files in folder
 
 # set directories
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN_small" # for DSRI
+dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # for DSRI
 #dir_anfiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning\Sounds\TestCochSoundsForDNN_small" # for local testing
 
 # import necessary packages and libraries
