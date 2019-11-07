@@ -1,7 +1,7 @@
 # script to check files in folder
 
 # set directories
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # sounds left channel
+dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN_small" # sounds left channel
 
 # import necessary packages and libraries
 import os # to get info about directories
