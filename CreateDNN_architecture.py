@@ -53,4 +53,4 @@ model = models.Model(inputs = [in1,in2], outputs = predicted_coords)
 model.compile(loss = 'mean_squared_error', optimizer = optimizers.Adam(), metrics=['mse'])
 
 model.summary()
-model.save(dir_wrfiles+'/DNN_model1.h5') # save model
+model.save_model(dir_wrfiles+'/DNN_model1.h5') # save model
