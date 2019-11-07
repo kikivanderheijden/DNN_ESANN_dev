@@ -1,13 +1,13 @@
 # specify directories
-dir_wrfiles = "/home/jovyan/DNN_ESANN_dev"
+dir_wrfiles = "/home/jovyan/DNN_ESANN_dev" # for testing on DSRI
+#dir_wrfiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning"
+# for testing locally
 
 # script to create DNN architecture
 from tensorflow.keras import layers
 from tensorflow.keras import models # contains different types of models (use sequential model here?)
 from tensorflow.keras import optimizers # contains different types of back propagation algorithms to train the model, 
                                         # including sgd (stochastic gradient
-from tensorflow.keras.models import model_from_json
-
 # specifications of the input
 time_sound = 2000
 nfreqs = 99
@@ -56,8 +56,10 @@ model.compile(loss = 'mean_squared_error', optimizer = optimizers.Adam(), metric
 model.summary()
 model.save(dir_wrfiles+'/DNN_model1.h5') # save model
 
-# serialize model to JSON
-model_json = model.to_json()
-with open(dir_wrfiles+"/DNN_model1.json", "w") as json_file:
-    json_file.write(model_json)
-    print("saved model as JSON file")
+# =============================================================================
+# # write model to JSON
+# model_json = model.to_json()
+# with open(dir_wrfiles+"/DNN_model1.json", "w") as json_file:
+#     json_file.write(model_json)
+#     print("saved model as JSON file")
+# =============================================================================
