@@ -68,10 +68,12 @@ train_an_r = []
                                            # and the third column, and remember that all indices start at 0!!!!
 with os.scandir(dir_anfiles) as listfiles:
     for entry in listfiles:
-        tempdata_l = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
-        tempdata_r = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
-        train_an_l.append(tempdata_l)
-        train_an_r.append(tempdata_r)
+#        tempdata_l = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
+#        tempdata_r = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
+        train_an_l[entry] = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
+        train_an_r[entry] = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
+#        train_an_l.append(tempdata_l)
+#        train_an_r.append(tempdata_r)
 #        tempdata_l = np.atleast_3d(tempdata_l) # convert into 3D matrix 
 #        tempdata_r = np.atleast_3d(tempdata_r) # convert into 3D matrix 
 #        tempdata_l = np.reshape(tempdata_l,(1,time_sound,nfreqs)) # reshape into correct dimensions
@@ -81,7 +83,7 @@ with os.scandir(dir_anfiles) as listfiles:
                     #print(entry_r.name)
         countfilesdone = countfilesdone+1
         if countfilesdone == 100:
-            print("100 files done")
+            print(countfilesdone*countfiles100, " files done")
             countfiles100 = countfiles100+1
             t.toc("these 100 files took")
             t.toc(restart=True)
