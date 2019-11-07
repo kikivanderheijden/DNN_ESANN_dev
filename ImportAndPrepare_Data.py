@@ -17,7 +17,7 @@ t.tic()
 # load numpy arrays from disk
 an_l = np.load(dir_anfiles+"/an_l.npy")
 an_r = np.load(dir_anfiles+"/an_r.npy")
-labels = np.load(dir_anfiles+"/trainlabels.npy")
+labels = np.load(dir_anfiles+"/labels.npy")
 t.toc("loading the numpy arrays took ")
 
 # shuffle all arrays in the same way
