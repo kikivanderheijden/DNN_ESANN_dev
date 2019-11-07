@@ -7,9 +7,10 @@ dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # sounds left channel
 import os # to get info about directories
 import numpy as np
 import math
-from pytictoc import tictoc
+from pytictoc import TicToc
+t = TicToc() # create instant of class
 
-tictoc.tic()
+t.tic()
 countfiles = 0
 with os.scandir(dir_anfiles) as listfiles:
     for entry in listfiles:
@@ -17,10 +18,10 @@ with os.scandir(dir_anfiles) as listfiles:
         #print(entry.name) # use this to display all file names
         #print(temploc) 
         #print(trainlabels)  
-tictoc.toc("scanning files took")
+t.toc("scanning files took")
 print("this folder contains" , countfiles, "files" )
 
-tictoc.tic()
+t.tic()
   # create array of location labels for the x and y coordinates. labels range from -1 to 1 in correspondence with the unit circle 
 # take labels from directory for left channel but they are the same for the left and right channel
 trainlabels_x = [] # initialize array of labels
@@ -45,5 +46,5 @@ with os.scandir(dir_anfiles) as listfiles:
 trainlabels = np.vstack((np.array(trainlabels_x),np.array(trainlabels_y)))
 trainlabels = np.transpose(trainlabels)
 
-tictoc.toc("creating the train labels took")
+t.toc("creating the train labels took")
 print("shape of training sounds is ", trainlabels.shape)    
