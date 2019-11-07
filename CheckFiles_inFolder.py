@@ -57,6 +57,7 @@ t.toc("creating the train labels took")
 print("shape of training labels is ", trainlabels.shape)    
 
 t.tic()
+fileidx = 0
 countfilesdone = 0
 countfiles100 = 0
 # find and read files
@@ -70,8 +71,8 @@ with os.scandir(dir_anfiles) as listfiles:
     for entry in listfiles:
 #        tempdata_l = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
 #        tempdata_r = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
-        train_an_l[entry] = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
-        train_an_r[entry] = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
+        train_an_l[fileidx] = loadmat(dir_anfiles+"/"+entry.name)['AN_l']
+        train_an_r[fileidx] = loadmat(dir_anfiles+"/"+entry.name)['AN_r']
 #        train_an_l.append(tempdata_l)
 #        train_an_r.append(tempdata_r)
 #        tempdata_l = np.atleast_3d(tempdata_l) # convert into 3D matrix 
@@ -82,6 +83,7 @@ with os.scandir(dir_anfiles) as listfiles:
 #        train_an_r = np.append(train_an_r,tempdata_r,axis = 0) # when arrays are same dimension, append along first dimension   
                     #print(entry_r.name)
         countfilesdone = countfilesdone+1
+        fileidx = fileidx+1
         if countfilesdone == 100:
             print(countfilesdone*countfiles100, " files done")
             countfiles100 = countfiles100+1
