@@ -11,20 +11,21 @@ from pytictoc import TicToc
 t = TicToc()
 from tensorflow.keras.models import load_model
 from tensorflow.keras.initializers import glorot_uniform
+from CustLoss_MSE import cust_mean_squared_error
 
 # load data
 labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = ImportAndPrepare_Data.im_and_prep()
 
 # load model
 t.tic()
-mymodel = load_model(dir_mofiles+"/DNN_model2.h5",custom_objects={'GlorotUniform': glorot_uniform()})
+mymodel = load_model(dir_mofiles+"/DNN_model2.h5",custom_objects={'GlorotUniform': glorot_uniform(), "cust_mean_squared_error": cust_mean_squared_error})
 mymodel.summary()
 t.toc("loading the model took ")
 
 
 # train the model
 t.tic()
-history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100, batch_size = 32, use_multiprocessing = True)
+history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100, batch_size = 32)
 #.toc("training the model took ")
 
 # =============================================================================
