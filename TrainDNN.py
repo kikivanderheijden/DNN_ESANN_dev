@@ -18,7 +18,7 @@ labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_
 
 # load model
 t.tic()
-mymodel = load_model(dir_mofiles+"/DNN_model2.h5",custom_objects={'GlorotUniform': glorot_uniform(), "cust_mean_squared_error": cust_mean_squared_error})
+mymodel = load_model(dir_mofiles+"/DNN_model3.h5",custom_objects={'GlorotUniform': glorot_uniform(), "cust_mean_squared_error": cust_mean_squared_error})
 mymodel.summary()
 t.toc("loading the model took ")
 
