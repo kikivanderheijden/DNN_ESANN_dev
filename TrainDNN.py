@@ -25,7 +25,7 @@ t.toc("loading the model took ")
 
 # train the model
 t.tic()
-history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100, batch_size = 32, multi_processinng = True)
+history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100, batch_size = 32, multi_processing = True)
 #.toc("training the model took ")
 
 # =============================================================================
