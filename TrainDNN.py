@@ -25,8 +25,14 @@ t.toc("loading the model took ")
 
 # train the model
 t.tic()
-history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100, batch_size = 32, use_multiprocessing = True)
-#.toc("training the model took ")
+history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 40, batch_size = 64, use_multiprocessing = True)
+t.toc("training the model took ")
+
+# metrics to save from the model
+hist_csv_file = 'history_model3_soundssmall.csv'
+with open(hist_csv_file, mode='w') as f:
+    hist_csv_file.to_csv(f)
+
 
 # =============================================================================
 #from tensorflow.keras.models import model_from_json

@@ -20,9 +20,9 @@ def im_and_prep():
     
     t.tic()
     # load numpy arrays from disk
-    an_l = np.load(dir_anfiles+"/an_l.npy")
-    an_r = np.load(dir_anfiles+"/an_r.npy")
-    labels = np.load(dir_anfiles+"/labels.npy")
+    an_l = np.load(dir_anfiles+"/an_l_small.npy")
+    an_r = np.load(dir_anfiles+"/an_r_small.npy")
+    labels = np.load(dir_anfiles+"/labels_small.npy")
     t.toc("loading the numpy arrays took ")
     
     # shuffle all arrays in the same way
