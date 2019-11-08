@@ -37,7 +37,9 @@ trainlabels_y = []
 with os.scandir(dir_anfiles) as listfiles:
     for entry in listfiles:
         # derive location from filename 
+        print(entry.name[1:4])
         temploc = int(entry.name[1:4]) # get azimuth location and convert to integer
+        
         # note that the naming of the files has 0 at front, while for the unit circle 0 should be at the right, correct this first
         if temploc >= 0 and temploc <= 90:
             temploc = np.abs(temploc - 90)
