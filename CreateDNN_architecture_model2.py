@@ -9,8 +9,8 @@ from tensorflow.keras import models # contains different types of models (use se
 from tensorflow.keras import optimizers # contains different types of back propagation algorithms to train the model, 
                                         # including sgd (stochastic gradient
 
-import os
-os.chdir(r"C:\Users\kiki.vanderheijden\Documents\PYTHON\DNN_ESANN\DNN_ESANN_dev")
+#import os
+#os.chdir(r"C:\Users\kiki.vanderheijden\Documents\PYTHON\DNN_ESANN\DNN_ESANN_dev")
 from CustLoss_MSE import cust_mean_squared_error # note that in this loss function, the axis of the MSE is set to 1
 
 
