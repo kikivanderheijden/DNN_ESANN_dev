@@ -16,16 +16,16 @@ from tensorflow.keras.initializers import glorot_uniform
 labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = ImportAndPrepare_Data.im_and_prep()
 
 # load model
-#t.tic()
-#mymodel = load_model(dir_mofiles+"/DNN_model1.h5",custom_objects={'GlorotUniform': glorot_uniform()})
-#mymodel.summary()
-#t.toc("loading the model took ")
+t.tic()
+mymodel = load_model(dir_mofiles+"/DNN_model2.h5",custom_objects={'GlorotUniform': glorot_uniform()})
+mymodel.summary()
+t.toc("loading the model took ")
 
 
 # train the model
-#t.tic()
-#history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100)
-#t.toc("training the model took ")
+t.tic()
+history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 100, batch_size = 32, use_multiprocessing = True)
+#.toc("training the model took ")
 
 # =============================================================================
 #from tensorflow.keras.models import model_from_json
