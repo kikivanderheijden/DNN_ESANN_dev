@@ -36,7 +36,7 @@ t.tic()
 history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 10, batch_size = 32, verbose = 1, use_multiprocessing = True, callbacks = [csv_loss_logger])
 t.toc("training the model took ")
 
-mymodel.save("model3.h5)
+mymodel.save("model3.h5")
 
 
 print("Save model")
