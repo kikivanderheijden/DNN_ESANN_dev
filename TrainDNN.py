@@ -16,7 +16,7 @@ from tensorflow.keras.callbacks import CSVLogger
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 csv_loss_logger = CSVLogger('history_model3_test93000sounds.csv')
-dir_model_logger = ModelCheckpoint("saved-model-{epoch:02d}-{val_acc:.2f}.hdf5")
+dir_model_logger = ModelCheckpoint("model3_test9300sounds.hdf5")
 model_logger = ModelCheckpoint(dir_model_logger,  monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=1)
 
 
