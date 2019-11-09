@@ -12,6 +12,9 @@ t = TicToc()
 from tensorflow.keras.models import load_model
 from tensorflow.keras.initializers import glorot_uniform
 from CustLoss_MSE import cust_mean_squared_error
+from tensorflow.keras.callbacks import CSVLogger
+
+csv_logger = CSVLogger('history_model3_soundssmall.csv')
 
 # load data
 labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = ImportAndPrepare_Data.im_and_prep()
@@ -25,13 +28,15 @@ t.toc("loading the model took ")
 
 # train the model
 t.tic()
-history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 1, batch_size = 32, use_multiprocessing = True)
+history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 1, batch_size = 32, verbose = 1, use_multiprocessing = True, callbacks = [csv_logger])
 t.toc("training the model took ")
 
-# metrics to save from the model
-hist_csv_file = 'history_model3_soundssmall.csv'
-with open(hist_csv_file, mode='w') as f:
-    history.to_csv(f)
+# =============================================================================
+# # metrics to save from the model
+# hist_csv_file = 'history_model3_soundssmall.csv'
+# with open(hist_csv_file, mode='w') as f:
+#     history.to_csv(f)
+# =============================================================================
 
 # =============================================================================
 #from tensorflow.keras.models import model_from_json
