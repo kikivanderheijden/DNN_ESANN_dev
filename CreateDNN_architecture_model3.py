@@ -38,10 +38,10 @@ model_r_conv1 = layers.Conv2D(32,(1,3),activation='relu', padding = 'same')(in2)
 model_final_merge = layers.Subtract()([model_l_conv1, model_r_conv1]) # does the number of parameters change if you do not make this into a subtraction
                                                                       # but use it as two channels instead? 
 model_final_conv1 = layers.Conv2D(64,(1,3),activation='relu', padding = 'same')(model_final_merge)
-model_final_conv1_bn = layers.BatchNormalization()(model_final_conv1) # I'm adding the batch normalization after the 
+#model_final_conv1_bn = layers.BatchNormalization()(model_final_conv1) # I'm adding the batch normalization after the 
                                                                       # activation function, but it may also be good to do
                                                                       # to do it before the activation
-model_final_conv1_mp = layers.MaxPooling2D(1,2)(model_final_conv1_bn)
+model_final_conv1_mp = layers.MaxPooling2D(1,2)(model_final_conv1)
 
 model_final_conv2 = layers.Conv2D(128,(1,3),activation='relu', padding = 'same')(model_final_conv1_mp)
 #model_final_conv2_bn = layers.BatchNormalization()(model_final_conv2) # I'm adding the batch normalization after the 
