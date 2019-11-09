@@ -16,8 +16,8 @@ from tensorflow.keras.callbacks import CSVLogger
 from tensorflow.keras.callbacks import ModelCheckpoint
 
 csv_loss_logger = CSVLogger('history_model3_test93000sounds.csv')
-dir_model_logger = ModelCheckpoint("model3_test9300sounds.hdf5")
-model_logger = ModelCheckpoint(dir_model_logger,  monitor='val_loss', verbose=1, save_best_only=False, save_weights_only=False, mode='auto', period=1)
+dir_model_logger = ModelCheckpoint("model3_test9300sounds.h5")
+model_logger = ModelCheckpoint(dir_model_logger,  monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=1)
 
 
 # load data
@@ -34,6 +34,13 @@ t.toc("loading the model took ")
 t.tic()
 history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 1, batch_size = 32, verbose = 1, use_multiprocessing = True, callbacks = [csv_loss_logger, model_logger])
 t.toc("training the model took ")
+
+mymodel.save("model3.h5)
+
+print("Save model")
+
+
+
 
 # =============================================================================
 # # metrics to save from the model
