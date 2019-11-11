@@ -1,7 +1,7 @@
 # script to check files in folder
 
 # set directories
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN_small" # for DSRI
+dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # for DSRI
 dir_wrfiles = "/home/jovyan/Data"
 #dir_anfiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning\Sounds\TestCochSoundsForDNN_small" # for local testing
 
@@ -43,8 +43,8 @@ with os.scandir(dir_anfiles) as listfiles:
             temploc = np.abs(temploc - 90)
         elif temploc > 90:
             temploc = np.abs(temploc - 90- 360)
-        temp_xcoord = math.cos(math.radians(temploc)) # math.cos operates on radians so convert angle to rad first
-        temp_ycoord = math.sin(math.radians(temploc))
+        temp_xcoord = np.around(math.cos(math.radians(temploc)),3,out=None) # math.cos operates on radians so convert angle to rad first
+        temp_ycoord = np.around(math.sin(math.radians(temploc)),3,out=None)
         trainlabels_x.append(temp_xcoord)
         trainlabels_y.append(temp_ycoord) 
 # add together in 2D array where column 1 = x coord and column 2 = y coord
@@ -82,6 +82,6 @@ train_an_r_array = np.asarray(train_an_r)
 print("shape of the training sounds array is ", train_an_l_array.shape)
 
 # save numpy arrays
-np.save(dir_wrfiles+"/an_l_small.npy",train_an_l_array)
-np.save(dir_wrfiles+"/an_r_small.npy",train_an_r_array)
-np.save(dir_wrfiles+"/labels_small.npy",trainlabels)
+np.save(dir_wrfiles+"/an_l.npy",train_an_l_array)
+np.save(dir_wrfiles+"/an_r.npy",train_an_r_array)
+np.save(dir_wrfiles+"/labels.npy",trainlabels)
