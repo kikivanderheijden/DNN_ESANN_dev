@@ -32,11 +32,13 @@ print("this folder contains" , countfiles, "files" )
 t.tic()
 # create array of location labels for the x and y coordinates. labels range from -1 to 1 in correspondence with the unit circle 
 # take labels from directory for left channel but they are the same for the left and right channel
-trainlabels_x = [] # initialize array of labels
+trainlabels_x = [] # initialize list of labels
 trainlabels_y = []
+filenames = [] # initialize list of original file names
 with os.scandir(dir_anfiles) as listfiles:
     for entry in listfiles:
         # derive location from filename 
+        filenames.append(entry.name[:-4]) # do not include extension
         temploc = int(entry.name[1:4]) # get azimuth location and convert to integer
         # note that the naming of the files has 0 at front, while for the unit circle 0 should be at the right, correct this first
         if temploc >= 0 and temploc <= 90:
@@ -81,7 +83,10 @@ train_an_l_array = np.asarray(train_an_l)
 train_an_r_array = np.asarray(train_an_r)
 print("shape of the training sounds array is ", train_an_l_array.shape)
 
-# save numpy arrays
+# save numpy arrays and file names
 np.save(dir_wrfiles+"/an_l.npy",train_an_l_array)
 np.save(dir_wrfiles+"/an_r.npy",train_an_r_array)
 np.save(dir_wrfiles+"/labels.npy",trainlabels)
+
+import pickle
+pickle.dump(filenames, open(dir_wrfiles+'/listfilenames.p','wb'))
