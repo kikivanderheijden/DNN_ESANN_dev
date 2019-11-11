@@ -1,7 +1,7 @@
 # script to check files in folder
 
 # set directories
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN" # for DSRI
+dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN_small" # for DSRI
 dir_wrfiles = "/home/jovyan/Data"
 #dir_anfiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning\Sounds\TestCochSoundsForDNN_small" # for local testing
 
@@ -84,9 +84,9 @@ train_an_r_array = np.asarray(train_an_r)
 print("shape of the training sounds array is ", train_an_l_array.shape)
 
 # save numpy arrays and file names
-np.save(dir_wrfiles+"/an_l.npy",train_an_l_array)
-np.save(dir_wrfiles+"/an_r.npy",train_an_r_array)
-np.save(dir_wrfiles+"/labels.npy",trainlabels)
+np.save(dir_wrfiles+"/an_l_small.npy",train_an_l_array)
+np.save(dir_wrfiles+"/an_r_small.npy",train_an_r_array)
+np.save(dir_wrfiles+"/labels_small.npy",trainlabels)
 
 import pickle
-pickle.dump(filenames, open(dir_wrfiles+'/listfilenames.p','wb'))
+pickle.dump(filenames, open(dir_wrfiles+'/listfilenames_small.p','wb'))
