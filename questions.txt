@@ -1,0 +1,54 @@
+Questions:
+
+- 	Should I use drop-out for regularization, and if yes, at which points? There are models that do it
+	after each layer while others use it only at the end (which is what I did for now). 
+
+- 	Batch normalization appears to be good to improve optimization, but in my case it seemed to mess up
+	the results a lot. Should I keep trying to use it? 
+	
+- 	What should I do regarding zeropadding? Is it important to keep the dimensions consistent to the 
+	original dimensions? 
+
+- 	How do I decide how many kernels to use in each layer?
+
+- 	I do not fully understand the functioning of the flattening layer --> e.g. along which dimension is
+	it flattening?
+	
+- 	If I look at existing papers, I see that I should test a lot of different parameters. However, I do
+	not have the time for this, what should I do?
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+From notes:
+•	Batch normalization: according to Goodfellow (p. 261), the primary purpose of batch normalization is to improve optimization by reparametrizing 
+the model in a way that introduces both additive and multiplicative noise on the hidden units at training time  this noise can have a regularizing 
+effect, and that is what would make the dropout unnecessary.  I did implement batch normalization after each layer.
+o	Goodfellow (p. 309) describe batch normalization as a way to avoid that updating the parameters of all layers together results in strange results
+ as a consequence of using updates that were computed under the assumption that the other functions remain constant. This is done by reparametrizing 
+ (i.e. normalizing).
+
+	
+
+	

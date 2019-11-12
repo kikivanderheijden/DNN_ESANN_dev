@@ -1,7 +1,7 @@
 # script to check files in folder
 
 # set directories
-dir_anfiles = "/home/jovyan/Data/TestCochSoundsForDNN_small" # for DSRI
+dir_anfiles = "/home/jovyan/Data/TESTDNN_small2" # for DSRI
 dir_wrfiles = "/home/jovyan/Data"
 #dir_anfiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning\Sounds\TestCochSoundsForDNN_small" # for local testing
 
@@ -76,17 +76,17 @@ with os.scandir(dir_anfiles) as listfiles:
             t.toc("these 100 files took")
             t.toc(restart=True)
             countfilesdone = 0
-t.toc("loading the train sounds took ")
-print("shape of training sounds is", len(train_an_l))
+t.toc("loading the sounds took ")
+print("shape of sounds is", len(train_an_l))
 # convert to nunmpy array
 train_an_l_array = np.asarray(train_an_l)
 train_an_r_array = np.asarray(train_an_r)
-print("shape of the training sounds array is ", train_an_l_array.shape)
+print("shape of the sound array is ", train_an_l_array.shape)
 
 # save numpy arrays and file names
-np.save(dir_wrfiles+"/an_l_small.npy",train_an_l_array)
-np.save(dir_wrfiles+"/an_r_small.npy",train_an_r_array)
-np.save(dir_wrfiles+"/labels_small.npy",trainlabels)
+np.save(dir_wrfiles+"/an_l_18000.npy",train_an_l_array)
+np.save(dir_wrfiles+"/an_r_18000.npy",train_an_r_array)
+np.save(dir_wrfiles+"/labels_18000.npy",trainlabels)
 
 import pickle
-pickle.dump(filenames, open(dir_wrfiles+'/listfilenames_small.p','wb'))
+pickle.dump(filenames, open(dir_wrfiles+'/listfilenames_18000.p','wb'))
