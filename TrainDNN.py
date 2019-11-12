@@ -2,11 +2,11 @@
 
 dir_fufiles = "/home/jovyan/DNN_ESANN_dev" # specify directory where function files are located
 dir_mofiles = "/home/jovyan/DNN_ESANN_dev" # specify directory where model files are located 
-
+dir_anfiles = "/home/jovyan/Data"
 #dir_mofiles = r"C:\Users\kiki.vanderheijden\Documents\PostDoc_Auditory\DeepLearning"
 
 # import packages, libraries, functions to call them later
-import ImportAndPrepare_Data
+#import ImportAndPrepare_Data
 from pytictoc import TicToc
 t = TicToc()
 from tensorflow.keras.models import load_model
@@ -14,14 +14,22 @@ from tensorflow.keras.initializers import glorot_uniform
 from CustLoss_MSE import cust_mean_squared_error
 from tensorflow.keras.callbacks import CSVLogger
 from tensorflow.keras.callbacks import ModelCheckpoint
+import numpy as np
 
 csv_loss_logger = CSVLogger('history_model5.csv')
-dir_model_logger = ModelCheckpoint(dir_mofiles+"/model5.h5")
+dir_model_logger = ModelCheckpoint(dir_mofiles+"/model5.hdf5")
 model_logger = ModelCheckpoint(dir_model_logger,  monitor='val_loss', verbose=1, save_best_only=False, save_weights_only=False, mode='auto', period=1)
 
 
 # load data
-labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = ImportAndPrepare_Data.im_and_prep()
+#labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = ImportAndPrepare_Data.im_and_prep()
+labels_rand_train = np.load(dir_anfiles+"/labels_train.npy")
+labels_rand_test = np.load(dir_anfiles+"/labels_test.npy")
+an_l_rand_train = np.load(dir_anfiles+"/an_l_train.npy")
+an_l_rand_test = np.load(dir_anfiles+"/an_r_test.npy")
+an_r_rand_train = np.load(dir_anfiles+"/an_l_train.npy")
+an_r_rand_test = np.load(dir_anfiles+"/an_r_test.npy")
+
 
 # load model
 t.tic()
