@@ -39,7 +39,7 @@ t.toc("training the model took ")
 mymodel.save("model5_final.h5")
 
 
-print("Save model")
+print("Final model was saved")
 
 
 
