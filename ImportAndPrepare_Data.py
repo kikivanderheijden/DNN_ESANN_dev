@@ -58,6 +58,9 @@ def im_and_prep():
     np.save(dir_anfiles+"/an_r_test_18000.npy",an_r_rand_test)
     np.save(dir_anfiles+"/labels_train_18000.npy",labels_rand_train)
     np.save(dir_anfiles+"/labels_test_18000.npy",labels_rand_test)
+    pickle.dump(filenames_rand_train, open(dir_anfiles+'/listfilenames_18000_train.p','wb'))
+    pickle.dump(filenames_rand_test, open(dir_anfiles+'/listfilenames_18000_test.p','wb'))
+
     print("numpy arrays are saved to disk")
 
     
