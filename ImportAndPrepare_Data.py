@@ -20,9 +20,9 @@ def im_and_prep():
     
     t.tic()
     # load numpy arrays from disk
-    an_l = np.load(dir_anfiles+"/an_l.npy")
-    an_r = np.load(dir_anfiles+"/an_r.npy")
-    labels = np.load(dir_anfiles+"/labels.npy")
+    an_l = np.load(dir_anfiles+"/an_l_18000.npy")
+    an_r = np.load(dir_anfiles+"/an_r_18000.npy")
+    labels = np.load(dir_anfiles+"/labels_18000.npy")
     t.toc("loading the numpy arrays took ")
     
     # shuffle all arrays in the same way
@@ -50,12 +50,12 @@ def im_and_prep():
     an_r_rand_test = np.expand_dims(an_r_rand_test,axis = 3)
     
         #save numpy arrays for model evaluation after training
-    np.save(dir_anfiles+"/an_l_train.npy",an_l_rand_train)
-    np.save(dir_anfiles+"/an_r_train.npy",an_r_rand_train)
-    np.save(dir_anfiles+"/an_l_test.npy",an_l_rand_test)
-    np.save(dir_anfiles+"/an_r_test.npy",an_r_rand_test)
-    np.save(dir_anfiles+"/labels_train.npy",labels_rand_train)
-    np.save(dir_anfiles+"/labels_test.npy",labels_rand_test)
+    np.save(dir_anfiles+"/an_l_train_18000.npy",an_l_rand_train)
+    np.save(dir_anfiles+"/an_r_train_18000.npy",an_r_rand_train)
+    np.save(dir_anfiles+"/an_l_test_18000.npy",an_l_rand_test)
+    np.save(dir_anfiles+"/an_r_test_18000.npy",an_r_rand_test)
+    np.save(dir_anfiles+"/labels_train_18000.npy",labels_rand_train)
+    np.save(dir_anfiles+"/labels_test_18000.npy",labels_rand_test)
     print("numpy arrays are saved to disk")
 
     
