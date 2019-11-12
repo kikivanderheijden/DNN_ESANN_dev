@@ -30,6 +30,12 @@ an_l_rand_test = np.load(dir_anfiles+"/an_r_test.npy")
 an_r_rand_train = np.load(dir_anfiles+"/an_l_train.npy")
 an_r_rand_test = np.load(dir_anfiles+"/an_r_test.npy")
 
+an_l_rand_train = np.expand_dims(an_l_rand_train,axis = 3)
+an_l_rand_test = np.expand_dims(an_l_rand_test,axis = 3)
+an_r_rand_train = np.expand_dims(an_r_rand_train,axis = 3)
+an_r_rand_test = np.expand_dims(an_r_rand_test,axis = 3)
+
+
 
 # load model
 t.tic()
