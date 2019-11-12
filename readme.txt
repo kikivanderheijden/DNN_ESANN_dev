@@ -32,4 +32,11 @@ Pipeline
 									
 [1] training - perform DNN 		:   [TrainDNN.py] Run this script to train the model. Make sure that the 
 									correct set of sounds + model is loaded, processed, and saved. 
-					
+
+--------------------------------------------------------------------------------------------
+Model versions
+--------------------------------------------------------------------------------------------
+
+Model 4 						: 	Describe details 
+
+Model 5							: 	Added Dropout = 0.2 to every layer of the model; batch size = 64

@@ -17,6 +17,8 @@ Questions:
 - 	If I look at existing papers, I see that I should test a lot of different parameters. However, I do
 	not have the time for this, what should I do?
 	
+- 	When should we submit the paper? I.e. new deadline. 
+	
 	
 	
 	

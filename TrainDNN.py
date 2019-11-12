@@ -15,9 +15,9 @@ from CustLoss_MSE import cust_mean_squared_error
 from tensorflow.keras.callbacks import CSVLogger
 from tensorflow.keras.callbacks import ModelCheckpoint
 
-csv_loss_logger = CSVLogger('history_model4.csv')
-dir_model_logger = ModelCheckpoint("model4.h5")
-#model_logger = ModelCheckpoint(dir_model_logger,  monitor='val_loss', verbose=1, save_best_only=False, save_weights_only=False, mode='auto', period=1)
+csv_loss_logger = CSVLogger('history_model5.csv')
+dir_model_logger = ModelCheckpoint(dir_mofiles+"/model5.h5")
+model_logger = ModelCheckpoint(dir_model_logger,  monitor='val_loss', verbose=1, save_best_only=False, save_weights_only=False, mode='auto', period=1)
 
 
 # load data
@@ -25,7 +25,7 @@ labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_
 
 # load model
 t.tic()
-mymodel = load_model(dir_mofiles+"/DNN_model4.h5",custom_objects={'GlorotUniform': glorot_uniform(), "cust_mean_squared_error": cust_mean_squared_error})
+mymodel = load_model(dir_mofiles+"/DNN_model5.h5",custom_objects={'GlorotUniform': glorot_uniform(), "cust_mean_squared_error": cust_mean_squared_error})
 mymodel.summary()
 t.toc("loading the model took ")
 
@@ -33,10 +33,10 @@ t.toc("loading the model took ")
 
 # train the model
 t.tic()
-history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 50, batch_size = 64, verbose = 1, use_multiprocessing = True, callbacks = [csv_loss_logger])
+history = mymodel.fit([an_l_rand_train, an_r_rand_train], labels_rand_train, validation_data=((an_l_rand_test,an_r_rand_test),labels_rand_test), epochs = 20, batch_size = 64, verbose = 1, use_multiprocessing = True, callbacks = [csv_loss_logger])
 t.toc("training the model took ")
 
-mymodel.save("model4.h5")
+mymodel.save("model5_final.h5")
 
 
 print("Save model")
