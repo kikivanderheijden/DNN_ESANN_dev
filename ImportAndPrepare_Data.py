@@ -13,20 +13,22 @@ def im_and_prep():
     import gc # garbage collector
     from pytictoc import TicToc 
     t = TicToc() # create instant of class
+    import pickle
     #import seaborn as sns
     
     # set parameters
-    testset = 0.15 # size of testset
+    testset = 0.20 # size of testset
     
     t.tic()
     # load numpy arrays from disk
     an_l = np.load(dir_anfiles+"/an_l_18000.npy")
     an_r = np.load(dir_anfiles+"/an_r_18000.npy")
     labels = np.load(dir_anfiles+"/labels_18000.npy")
+    filenames = pickle.load(open(dir_anfiles+'/listfilenames_18000.p','rb'))
     t.toc("loading the numpy arrays took ")
     
     # shuffle all arrays in the same way
-    labels_rand, an_l_rand, an_r_rand = shuffle(labels, an_l, an_r, random_state = 0)
+    labels_rand, an_l_rand, an_r_rand, filenames_rand = shuffle(labels, an_l, an_r, filenames, random_state = 0)
     
     # if shuffling is  OK, remove unused variables from memory
     del labels
@@ -35,7 +37,7 @@ def im_and_prep():
     gc.collect() # collect garbage to save memory
     
     # create a train and test split
-    labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test = train_test_split(labels_rand, an_l_rand, an_r_rand, test_size = testset, shuffle = False)
+    labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test, filenames_rand_train, filenames_rand_test = train_test_split(labels_rand, an_l_rand, an_r_rand, filenames_rand, test_size = testset, shuffle = False)
     
     # clean memory
     del labels_rand
