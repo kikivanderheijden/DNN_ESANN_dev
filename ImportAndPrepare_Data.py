@@ -1,7 +1,7 @@
 
 # read and preprocess sounds in the DSRI environment
 
-def im_and_prep():
+def im_and_prep(modelname):
 # define directories, add r before the name because a normal string cannot be used as a path, alternatives are 
 # using / or \\ instead of \
     dir_anfiles = "/home/jovyan/Data" # sounds left channel
@@ -51,27 +51,22 @@ def im_and_prep():
     an_r_rand_train = np.expand_dims(an_r_rand_train,axis = 3)
     an_r_rand_test = np.expand_dims(an_r_rand_test,axis = 3)
     
-        #save numpy arrays for model evaluation after training
-    np.save(dir_anfiles+"/an_l_train_18000.npy",an_l_rand_train)
-    np.save(dir_anfiles+"/an_r_train_18000.npy",an_r_rand_train)
-    np.save(dir_anfiles+"/an_l_test_18000.npy",an_l_rand_test)
-    np.save(dir_anfiles+"/an_r_test_18000.npy",an_r_rand_test)
-    np.save(dir_anfiles+"/labels_train_18000.npy",labels_rand_train)
-    np.save(dir_anfiles+"/labels_test_18000.npy",labels_rand_test)
-    pickle.dump(filenames_rand_train, open(dir_anfiles+'/listfilenames_18000_train.p','wb'))
-    pickle.dump(filenames_rand_test, open(dir_anfiles+'/listfilenames_18000_test.p','wb'))
+    #save numpy arrays for model evaluation after training
+    np.save(dir_anfiles+"/an_l_train_18000_"+modelname+".npy",an_l_rand_train)
+    np.save(dir_anfiles+"/an_r_train_18000_"+modelname+".npy",an_r_rand_train)
+    np.save(dir_anfiles+"/an_l_test_18000_"+modelname+".npy",an_l_rand_test)
+    np.save(dir_anfiles+"/an_r_test_18000_"+modelname+".npy",an_r_rand_test)
+    np.save(dir_anfiles+"/labels_train_18000_"+modelname+".npy",labels_rand_train)
+    np.save(dir_anfiles+"/labels_test_18000_"+modelname+".npy",labels_rand_test)
+    pickle.dump(filenames_rand_train, open(dir_anfiles+'/listfilenames_18000_train_'+modelname+'.p','wb'))
+    pickle.dump(filenames_rand_test, open(dir_anfiles+'/listfilenames_18000_test_'+modelname+'.p','wb'))
 
     print("numpy arrays are saved to disk")
-
-    
     print("Shape of training sounds is:", an_l_rand_train.shape)
     print("Shape of training labels is:", labels_rand_train.shape)
-    
     print("Shape of test sounds is:", an_l_rand_test.shape)
     print("Shape of test labels is:", labels_rand_test.shape)
     
     #sns.countplot(labels_rand_train[:,0])
-    
-
-    
+        
     return labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_train, an_r_rand_test

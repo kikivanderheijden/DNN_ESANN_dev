@@ -13,7 +13,7 @@ from tensorflow.keras import optimizers # contains different types of back propa
 from CustLoss_MSE import cust_mean_squared_error # note that in this loss function, the axis of the MSE is set to 1
 
 # specify parameters
-modelname   = 'model5'
+modelname   = 'model6'
 time_sound  = 2000 # input dimension 1 (time)
 nfreqs      = 99 # input dimension 2 (frequencies)
 
@@ -33,12 +33,10 @@ model_r_conv1_mp    = layers.MaxPooling2D(pool_size = (1,3))(model_r_conv1)
 model_r_conv1_mp_do = layers.Dropout(0.2)(model_r_conv1_mp)
 
 # merged
-model_final_merge   = layers.Subtract()([model_l_conv1_mp_do, model_r_conv1_mp_do]) 
-model_final_conv1   = layers.Conv2D(64,(3,3),activation='relu', padding = 'same')(model_final_merge)
-model_final_conv1_mp = layers.MaxPooling2D(pool_size = (2,3))(model_final_conv1)
+model_final_merge       = layers.Concatenate(axis = -1)([model_l_conv1_mp_do, model_r_conv1_mp_do]) 
+model_final_conv1       = layers.Conv2D(64,(3,3),activation='relu', padding = 'same')(model_final_merge)
+model_final_conv1_mp    = layers.MaxPooling2D(pool_size = (2,3))(model_final_conv1)
 model_final_conv1_mp_do = layers.Dropout(0.2)(model_final_conv1_mp)
-#model_final_conv2 = layers.Conv2D(128,(1,3),activation='relu', padding = 'same')(model_final_conv1_mp)
-#model_final_conv2_mp = layers.MaxPooling2D(pool_size = (1,4))(model_final_conv2)
 
 model_final_flatten = layers.Flatten()(model_final_conv1_mp_do)
 model_final_dropout = layers.Dropout(0.2)(model_final_flatten) # dropout for regularization
