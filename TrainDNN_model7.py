@@ -17,7 +17,7 @@ from CustLoss_MSE import cust_mean_squared_error
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 
 # define name of model
-modelname = "model6"
+modelname = "model7"
 
 # define training parameters
 nrepochs = 100
