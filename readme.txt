@@ -45,3 +45,9 @@ Model 6							: 	Replaced merging-subtract with merging-concatenate, added early
 									--> note that you set the 'Restore best weights' to False, maybe it's better
 									to set that to True? Check model history callback to see if you can retrieve 
 									the weights of the best model. 
+
+Model 7							: 	This is the same model as model 6, but with batch size 128, number of epochs 
+									to 100, and early stopping patience to 10
+									
+Model 8							: 	Try less pooling in the frequency domain --> but what about the double number
+									of parameters, is that a problem?

@@ -1,7 +1,7 @@
 Questions:
 
 - 	Should I use drop-out for regularization, and if yes, at which points? There are models that do it
-	after each layer while others use it only at the end (which is what I did for now). 
+	after each layer while others use it only at the end. 
 
 - 	Batch normalization appears to be good to improve optimization, but in my case it seemed to mess up
 	the results a lot. Should I keep trying to use it? 
@@ -10,6 +10,9 @@ Questions:
 	original dimensions? 
 
 - 	How do I decide how many kernels to use in each layer?
+
+- 	Should I ue early stopping? I could set it to 100 epochs and stop if there is no improvement for 
+	10 consecutive epochs?
 
 - 	I do not fully understand the functioning of the flattening layer --> e.g. along which dimension is
 	it flattening?
