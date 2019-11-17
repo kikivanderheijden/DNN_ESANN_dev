@@ -21,13 +21,13 @@ import pickle
 os.chdir(dirscripts)
 from CustLoss_MSE import cust_mean_squared_error
 from ModelPredictions import generate_model_predictions
-from CustLoss_cosine_distance import cos_dist_2D # note that in this loss function, the axis of the MSE is set to 1
+from CustLoss_Combined_Cosine_MSE import cos_dist_2D_and_mse # note that in this loss function, the axis of the MSE is set to 1
 from CustMet_cosine_distance import cos_distmet_2D
 
 
 
 # define name of current model
-modelname = "model8"
+modelname = "model10"
 
 # model parameters for evaluation
 sizebatches = 128
@@ -39,7 +39,7 @@ azimuthrange = np.arange(0,360,10)
 # Preparations
 #------------------------------------------------------------------------------
 # load model
-model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D": cos_dist_2D, "cos_distmet_2D": cos_distmet_2D})
+model = load_model(dirfiles+'/'+modelname+'.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_and_mse": cos_dist_2D_and_mse, "cos_distmet_2D": cos_distmet_2D})
 #model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error})
 
 # load history of the model

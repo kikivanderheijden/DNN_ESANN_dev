@@ -2,7 +2,7 @@
 from tensorflow.keras import backend as K
 # computing the cosine similarity between two 2d vectors
 # two fake points
-def cos_dist_2D_and_mse(y_true,y_pred):
+def cos_dist_2D_and_mse_weighed(y_true,y_pred):
    
     # for testing    
     #y_true = np.array([[1,1],[0,1]])
@@ -23,7 +23,7 @@ def cos_dist_2D_and_mse(y_true,y_pred):
     # take the mean across all samples because you have to return one scalar
     cos_dist = 1-cos_sim
     
-    my_loss = MSE+cos_dist
+    my_loss = MSE+.5*cos_dist
     
     return my_loss
 
