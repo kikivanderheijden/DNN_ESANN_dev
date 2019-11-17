@@ -63,7 +63,7 @@ Y_test = labels_test
 #------------------------------------------------------------------------------
 
 # predict --> create predictions (set to 1) or load predictions (set to 0)
-newpredictions = 1
+newpredictions = 0
 if newpredictions == 1:
     predictions = generate_model_predictions(model, X_test, modelname, dirfiles)
 elif newpredictions == 0:

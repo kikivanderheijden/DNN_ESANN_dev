@@ -13,11 +13,12 @@ from pytictoc import TicToc
 t = TicToc()
 from tensorflow.keras.models import load_model
 from tensorflow.keras.initializers import glorot_uniform
-from CustLoss_MSE import cust_mean_squared_error
+from CustLoss_cosine_distance import cos_dist_2D # note that in this loss function, the axis of the MSE is set to 1
+from CustMet_cosine_distance import cos_distmet_2D
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 
 # define name of model
-modelname = "model9"
+modelname = "model7"
 
 # define training parameters
 nrepochs = 100
@@ -40,7 +41,7 @@ labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_
 
 # load model
 t.tic()
-mymodel = load_model(dir_mofiles+"/DNN_"+modelname+".h5",custom_objects={'GlorotUniform': glorot_uniform(), "cust_mean_squared_error": cust_mean_squared_error})
+mymodel = load_model(dir_mofiles+"/DNN_"+modelname+".h5",custom_objects={'GlorotUniform': glorot_uniform(), "cos_dist_2D": cos_dist_2D, "cos_distmet_2D": cos_distmet_2D})
 mymodel.summary()
 t.toc("loading the model took ")
 
