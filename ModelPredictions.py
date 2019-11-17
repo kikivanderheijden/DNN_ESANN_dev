@@ -3,10 +3,10 @@
 # import necessary libraties
 import numpy as np
 
-def generate_model_predictions(model, X_test, modelname, dir_wrfiles):
+def generate_model_predictions(model, X_test, modelname, dir_wrfiles, batchs):
     
     # generate predictions
-    predictions = model.predict(X_test, batch_size=None, verbose=1, steps=None, callbacks=None, max_queue_size=10)
+    predictions = model.predict(X_test, batch_size=batchs, verbose=1, steps=None, callbacks=None, max_queue_size=10)
     
     np.save(dir_wrfiles+"/predictions_"+modelname+".npy",predictions)
 

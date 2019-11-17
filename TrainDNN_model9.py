@@ -18,7 +18,7 @@ from CustMet_cosine_distance import cos_distmet_2D
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
 
 # define name of model
-modelname = "model7"
+modelname = "model9"
 
 # define training parameters
 nrepochs = 100

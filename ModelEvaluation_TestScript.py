@@ -30,7 +30,7 @@ from CustMet_cosine_distance import cos_distmet_2D
 modelname = "model8"
 
 # model parameters for evaluation
-sizebatches = 64
+sizebatches = 128
 
 # set azimuth range
 azimuthrange = np.arange(0,360,10)
@@ -63,9 +63,9 @@ Y_test = labels_test
 #------------------------------------------------------------------------------
 
 # predict --> create predictions (set to 1) or load predictions (set to 0)
-newpredictions = 0
+newpredictions = 1
 if newpredictions == 1:
-    predictions = generate_model_predictions(model, X_test, modelname, dirfiles)
+    predictions = generate_model_predictions(model, X_test, modelname, dirfiles, sizebatches)
 elif newpredictions == 0:
     predictions = np.load(dirfiles+"/predictions_"+modelname+".npy")
         

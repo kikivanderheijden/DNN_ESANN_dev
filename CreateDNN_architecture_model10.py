@@ -10,12 +10,12 @@ from tensorflow.keras import layers
 from tensorflow.keras import models # contains different types of models (use sequential model here?)
 from tensorflow.keras import optimizers # contains different types of back propagation algorithms to train the model, 
                                         # including sgd (stochastic gradient
-#from CustLoss_MSE import cust_mean_squared_error # note that in this loss function, the axis of the MSE is set to 1
+from CustLoss_MSE import cust_mean_squared_error # note that in this loss function, the axis of the MSE is set to 1
 from CustLoss_cosine_distance import cos_dist_2D # note that in this loss function, the axis of the MSE is set to 1
 from CustMet_cosine_distance import cos_distmet_2D
 
 # specify parameters
-modelname   = 'model9'
+modelname   = 'model10'
 time_sound  = 2000 # input dimension 1 (time)
 nfreqs      = 99 # input dimension 2 (frequencies)
 

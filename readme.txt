@@ -49,5 +49,14 @@ Model 6							: 	Replaced merging-subtract with merging-concatenate, added early
 Model 7							: 	This is the same model as model 6, but with batch size 128, number of epochs 
 									to 100, and early stopping patience to 10
 									
-Model 8							: 	Try less pooling in the frequency domain --> but what about the double number
-									of parameters, is that a problem?
+Model 8							: 	Is with the cosine similarity loss function instead of the MSE. Estimates angles
+									away from the axes [-1 1] and [-1 1] well, but angles at the axes extremely poor.
+									For the y-axis it puts everything in the center, but at least on the axis, for the
+									x axis it scatters them all over the y axis rather than keeping it at the x axis.
+									
+Model 9 						: 	Is exactly the same as model 7 but with the cosine similarity loss to find out
+									whether the difference in score of model 8 is a consequence of the loss function 
+									or a consequence of the other parameters that I changed. 
+									
+Model 10 						: 	I will use a combined loss function in which the cosine similarity and the MSE are
+									both weighed 1.

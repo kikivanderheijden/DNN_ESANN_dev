@@ -8,6 +8,10 @@ def cos_dist_2D(y_true,y_pred):
     #y_true = np.array([[1,1],[0,1]])
     #y_pred = np.array([[1,1],[0,-1]])
     
+    # create some fake data
+    #y_true = np.array([[0,1],[1,0],[0,-1],[-1,0],[1,1],[1,-1],[-1,-1],[-1,1]])
+    #y_pred = np.array([[0,1],[1,0],[0,-1],[-1,0],[-1,-1],[-1,1],[1,1],[1,-1]])
+    
        
     #cos_sim = np.sum(y_true*y_pred, axis=1)/(np.sqrt(np.sum(np.square(y_true),axis=1))*np.sqrt(np.sum(np.square(y_pred),axis=1)))
     cos_sim = K.sum(y_true*y_pred, axis=1)/(K.sqrt(K.sum(K.square(y_true),axis=1))*K.sqrt(K.sum(K.square(y_pred),axis=1)))
