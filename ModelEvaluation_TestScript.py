@@ -21,13 +21,13 @@ import pickle
 os.chdir(dirscripts)
 from CustLoss_MSE import cust_mean_squared_error
 from ModelPredictions import generate_model_predictions
-from CustLoss_Combined_Cosine_MSE import cos_dist_2D_and_mse # note that in this loss function, the axis of the MSE is set to 1
+from CustLoss_Combined_Cosine_MSE_weighed import cos_dist_2D_and_mse_weighed # note that in this loss function, the axis of the MSE is set to 1
 from CustMet_cosine_distance import cos_distmet_2D
 
 
 
 # define name of current model
-modelname = "model10"
+modelname = "model11"
 
 # model parameters for evaluation
 sizebatches = 128
@@ -39,7 +39,7 @@ azimuthrange = np.arange(0,360,10)
 # Preparations
 #------------------------------------------------------------------------------
 # load model
-model = load_model(dirfiles+'/'+modelname+'.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_and_mse": cos_dist_2D_and_mse, "cos_distmet_2D": cos_distmet_2D})
+model = load_model(dirfiles+'/'+modelname+'.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_and_mse_weighed": cos_dist_2D_and_mse_weighed, "cos_distmet_2D": cos_distmet_2D})
 #model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error})
 
 # load history of the model
@@ -107,6 +107,11 @@ for  x in range(len(predangles)):
         tempangularerror = np.abs(360-np.abs(tempangularerror))
     angular_error_kiki[x] = tempangularerror
 
+cosine_distance_degrees = np.empty([len(predangles)])
+for  x in range(len(predangles)):
+     cossim = np.sum(labels_test[x]*predictions[x])/(np.sqrt(np.sum(np.square(labels_test[x])))*np.sqrt(np.sum(np.square(predictions[x]))))
+     cosine_distance_degrees[x] = np.arccos(cossim)*180/np.pi
+     
 # compute mean and standard deviation of error per target azimuth location
 mean_angular_error_pertargetangle = np.empty([len(azimuthrange)]) 
 stdev_angular_error_pertagetanle = np.empty([len(azimuthrange)]) 
@@ -233,13 +238,13 @@ plt.axis([-1.1, 1.1, -1.1, 1.1])
 plt.grid(color = 'k', linestyle = ':', linewidth = 1, alpha= .1)
 plt.savefig(dirfiles+'/plot_scatter_predicted_target_locs_cartcoord_0_90_180_270_for_'+modelname+'.png')
 
-anglecheck1 = 40
+anglecheck1 = 60
 color1 = (147/255,248/255,254/255)
-anglecheck2 = 140
+anglecheck2 = 160
 color2 = (36/255,31/255,249/255)
-anglecheck3 = 220
+anglecheck3 = 240
 color3 = (218/255,43/255,200/255)
-anglecheck4 = 320
+anglecheck4 = 340
 color4 = (1,0,0)
 plt.figure()
 plt.scatter(predictions[np.squeeze(names_test_angle==anglecheck1),0],predictions[np.squeeze(names_test_angle==anglecheck1),1],color=color1, alpha=0.4)
@@ -311,6 +316,15 @@ plt.plot(hist.mean_squared_error)
 plt.plot(hist.val_mean_squared_error)
 plt.title('Model MSE')
 plt.ylabel('MSE')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.show()
+
+plt.figure()
+plt.plot(hist.cos_distmet_2D)
+plt.plot(hist.val_cos_distmet_2D)
+plt.title('Model Cosine Distance')
+plt.ylabel('Cosine distance')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
