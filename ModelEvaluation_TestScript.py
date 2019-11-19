@@ -39,8 +39,8 @@ azimuthrange = np.arange(0,360,10)
 # Preparations
 #------------------------------------------------------------------------------
 # load model
-model = load_model(dirfiles+'/'+modelname+'.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_and_mse_weighed": cos_dist_2D_and_mse_weighed, "cos_distmet_2D": cos_distmet_2D})
-#model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error})
+#model = load_model(dirfiles+'/'+modelname+'.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_and_mse_weighed": cos_dist_2D_and_mse_weighed, "cos_distmet_2D": cos_distmet_2D})
+model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_and_mse_weighed": cos_dist_2D_and_mse_weighed, "cos_distmet_2D": cos_distmet_2D})
 
 # load history of the model
 hist = pandas.read_csv(dirfiles+"/history_"+modelname+".csv")
@@ -238,13 +238,13 @@ plt.axis([-1.1, 1.1, -1.1, 1.1])
 plt.grid(color = 'k', linestyle = ':', linewidth = 1, alpha= .1)
 plt.savefig(dirfiles+'/plot_scatter_predicted_target_locs_cartcoord_0_90_180_270_for_'+modelname+'.png')
 
-anglecheck1 = 60
+anglecheck1 = 40
 color1 = (147/255,248/255,254/255)
-anglecheck2 = 160
+anglecheck2 = 140
 color2 = (36/255,31/255,249/255)
-anglecheck3 = 240
+anglecheck3 = 220
 color3 = (218/255,43/255,200/255)
-anglecheck4 = 340
+anglecheck4 = 320
 color4 = (1,0,0)
 plt.figure()
 plt.scatter(predictions[np.squeeze(names_test_angle==anglecheck1),0],predictions[np.squeeze(names_test_angle==anglecheck1),1],color=color1, alpha=0.4)
