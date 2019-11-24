@@ -11,11 +11,11 @@ from tensorflow.keras import models # contains different types of models (use se
 from tensorflow.keras import optimizers # contains different types of back propagation algorithms to train the model, 
                                         # including sgd (stochastic gradient
 #from CustLoss_MSE import cust_mean_squared_error # note that in this loss function, the axis of the MSE is set to 1
-from CustLoss_Combined_Cosine_MSE import cos_dist_2D_and_mse # note that in this loss function, the axis of the MSE is set to 1
+from CustLoss_MSE import cust_mean_squared_error # note that in this loss function, the axis of the MSE is set to 1
 from CustMet_cosine_distance import cos_distmet_2D
 
 # specify parameters
-modelname   = 'model13'
+modelname   = 'model16'
 time_sound  = 2000 # input dimension 1 (time)
 nfreqs      = 99 # input dimension 2 (frequencies)
 
@@ -50,7 +50,7 @@ predicted_coords    = layers.Dense(2, activation = 'tanh')(model_final_dropout) 
 # create
 model = models.Model(inputs = [in1,in2], outputs = predicted_coords) # create
 # compile
-model.compile(loss = cos_dist_2D_and_mse_weighed, optimizer = optimizers.Adam(), metrics=['cosine_proximity','mse',cos_distmet_2D])
+model.compile(loss = cust_mean_squared_error, optimizer = optimizers.Adam(), metrics=['cosine_proximity','mse',cos_distmet_2D])
 # print summary
 model.summary()
 # save

@@ -73,11 +73,26 @@ Model 11 						: 	Used a combined loss function but the weights were .5 for cosi
 Model 12						: 	Same as model 11 but with 16 kernels in the final layer. Performed less well. Stopped
 									training after 21 epochs. 
 
-Model 13: 						: 	Same as model 11 but with combined loss function with weights 1 for both cosine and
-									MSE. Seems to be performing similar to model 11 for now. 
+Model 13 						: 	Same as model 11 but with combined loss function with weights 1 for both cosine and
+									MSE. Seems to be performing similar to model 11 for now. Was slightly worse than
+									model 11. 
 									
-									The main problem for all models appears to be that the y-dimension is estimated less 
-									correctly. The y-dimension is mainly dependent on monaural spectral cues so it may be 
-									that you are not picking up on these correctly --> In order to solve it, you could try
-									a different kernel size, for instance 1x5 instead of 1x3. 
+Model 14 						: 	Was stupid, wanted to use a larger kernel size than model 11 (otherwise the same model)
+									but set one dimension to an even number, i.e. 2x5. So results of this model should be
+									disregarded. 
 									
+									
+--------------------------------------------------------------------------------------------
+Formal model evaluation
+--------------------------------------------------------------------------------------------
+* Include the following models in the formal evaluation: 
+
+	Model 11: 		MSE & cos, 1 & .5
+
+	Model 13: 		MSE & cos, 1 & 1
+								
+	Model 15: 		MSE & cos, 1 & .5, larger kernel size	
+
+	Model 16: 		MSE only
+
+	Model 17: 		cos only
