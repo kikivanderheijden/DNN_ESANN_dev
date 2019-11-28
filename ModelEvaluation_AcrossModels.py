@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 dirfiles = r'C:\Users\kiki.vanderheijden\Documents\PYTHON\DNN_ESANN'
 
 # specify model names
-models = ['model11','model13','model15']
+models = ['model11','model13','model15', 'model16']
 
 # set azimuth range
 azimuthrange = np.arange(0,360,10)
@@ -152,6 +152,9 @@ color_model2_3 = (0, 0, 1,0)
 color_model3_1 = (0, 128/255, 15/255,1)
 color_model3_2 = (0, 128/255, 15/255,.4)
 color_model3_3 = (0, 128/255, 15/255,0)
+color_model4_1 = (1, 162/255, 0,1)
+color_model4_2 = (1, 162/255, 0,.4)
+color_model4_3 = (1, 162/255, 0,0)
 
 fig = plt.figure(figsize=(15,15))
 plt.scatter(mean_label[loc0,0],mean_label[loc0,1], s = 200, marker = 'o', edgecolors = color_true1, linewidths = 2, color = color_true1)
@@ -215,6 +218,24 @@ plt.errorbar(mean_prediction[2,loc8,0],mean_prediction[2,loc8,1], xerr = sem_pre
 plt.errorbar(mean_prediction[2,loc9,0],mean_prediction[2,loc9,1], xerr = sem_prediction[2,loc9,0], yerr = sem_prediction[2,loc9,1], fmt = 'D', markersize = 15, markeredgecolor =  color_model3_1, ecolor = color_model3_1, linewidth = 2, color=color_model3_1)
 plt.errorbar(mean_prediction[2,loc10,0],mean_prediction[2,loc10,1], xerr = sem_prediction[2,loc10,0], yerr = sem_prediction[2,loc10,1], fmt = 'D', markersize = 15, markeredgecolor =  color_model3_1, ecolor = color_model3_1, linewidth = 2, color=color_model3_2)
 plt.errorbar(mean_prediction[2,loc11,0],mean_prediction[2,loc11,1], xerr = sem_prediction[2,loc11,0], yerr = sem_prediction[2,loc11,1], fmt = 'D', markersize = 15, markeredgecolor =  color_model3_1, ecolor = color_model3_1, linewidth = 2, color=color_model3_3)
+
+#model4
+plt.errorbar(mean_prediction[3,loc0,0],mean_prediction[3,loc0,1], xerr = sem_prediction[3,loc0,0], yerr = sem_prediction[3,loc0,1], fmt = 'o', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_1)
+plt.errorbar(mean_prediction[3,loc1,0],mean_prediction[3,loc1,1], xerr = sem_prediction[3,loc1,0], yerr = sem_prediction[3,loc1,1], fmt = 'o', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_2)
+plt.errorbar(mean_prediction[3,loc2,0],mean_prediction[3,loc2,1], xerr = sem_prediction[3,loc2,0], yerr = sem_prediction[3,loc2,1], fmt = 'o', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_3)
+
+plt.errorbar(mean_prediction[3,loc3,0],mean_prediction[3,loc3,1], xerr = sem_prediction[3,loc3,0], yerr = sem_prediction[3,loc3,1], fmt = '^', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_1)
+plt.errorbar(mean_prediction[3,loc4,0],mean_prediction[3,loc4,1], xerr = sem_prediction[3,loc4,0], yerr = sem_prediction[3,loc4,1], fmt = '^', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_2)
+plt.errorbar(mean_prediction[3,loc5,0],mean_prediction[3,loc5,1], xerr = sem_prediction[3,loc5,0], yerr = sem_prediction[3,loc5,1], fmt = '^', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_3)
+
+plt.errorbar(mean_prediction[3,loc6,0],mean_prediction[3,loc6,1], xerr = sem_prediction[3,loc6,0], yerr = sem_prediction[3,loc6,1], fmt = 's', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_1)
+plt.errorbar(mean_prediction[3,loc7,0],mean_prediction[3,loc7,1], xerr = sem_prediction[3,loc7,0], yerr = sem_prediction[3,loc7,1], fmt = 's', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_2)
+plt.errorbar(mean_prediction[3,loc8,0],mean_prediction[3,loc8,1], xerr = sem_prediction[3,loc8,0], yerr = sem_prediction[3,loc8,1], fmt = 's', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_3)
+
+plt.errorbar(mean_prediction[3,loc9,0],mean_prediction[3,loc9,1], xerr = sem_prediction[3,loc9,0], yerr = sem_prediction[3,loc9,1], fmt = 'D', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_1)
+plt.errorbar(mean_prediction[3,loc10,0],mean_prediction[3,loc10,1], xerr = sem_prediction[3,loc10,0], yerr = sem_prediction[3,loc10,1], fmt = 'D', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_2)
+plt.errorbar(mean_prediction[3,loc11,0],mean_prediction[3,loc11,1], xerr = sem_prediction[3,loc11,0], yerr = sem_prediction[3,loc11,1], fmt = 'D', markersize = 15, markeredgecolor =  color_model4_1, ecolor = color_model4_1, linewidth = 2, color=color_model4_3)
+
 
 plt.axis('square')
 plt.axis([-1.1, 1.1, -1.1, 1.1])
