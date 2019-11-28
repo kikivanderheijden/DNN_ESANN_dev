@@ -15,6 +15,7 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.initializers import glorot_uniform
 from CustLoss_cosine_distance_angular import cos_dist_2D_angular
 from tensorflow.keras.callbacks import CSVLogger, ModelCheckpoint, EarlyStopping
+from CustMet_cosine_distance_angular import cos_distmet_2D_angular
 
 # define name of model
 modelname = "model18"
@@ -40,7 +41,7 @@ labels_rand_train, labels_rand_test, an_l_rand_train, an_l_rand_test, an_r_rand_
 
 # load model
 t.tic()
-mymodel = load_model(dir_mofiles+"/DNN_"+modelname+".h5",custom_objects={'GlorotUniform': glorot_uniform(), "cos_dist_2D_angular": cos_dist_2D_angular})
+mymodel = load_model(dir_mofiles+"/DNN_"+modelname+".h5",custom_objects={'GlorotUniform': glorot_uniform(), "cos_dist_2D_angular": cos_dist_2D_angular, "cos_distmet_2D_angular": cos_distmet_2D_angular})
 mymodel.summary()
 t.toc("loading the model took ")
 
