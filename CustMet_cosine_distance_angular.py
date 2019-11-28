@@ -6,7 +6,7 @@ import tensorflow as tf
 def cos_distmet_2D_angular(y_true, y_pred):
     cos_sim = K.sum(y_true*y_pred, axis=1)/(K.sqrt(K.sum(K.square(y_true),axis=1))*K.sqrt(K.sum(K.square(y_pred),axis=1)))
 
-    cosine_distance_degrees = tf.acos(cos_sim)*180/3.14159265359
+    cosine_distance_degrees = tf.acos(cos_sim)/3.14159265359
         
     # take the mean across all samples because you have to return one scalar
     
