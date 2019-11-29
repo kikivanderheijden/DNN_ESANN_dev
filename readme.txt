@@ -80,6 +80,8 @@ Model 13 						: 	Same as model 11 but with combined loss function with weights 
 Model 14 						: 	Was stupid, wanted to use a larger kernel size than model 11 (otherwise the same model)
 									but set one dimension to an even number, i.e. 2x5. So results of this model should be
 									disregarded. 
+
+Model 15 						: 	 Same as model 14 but with kernel size 3x5 in first layer. 
 									
 									
 --------------------------------------------------------------------------------------------
@@ -96,3 +98,5 @@ Formal model evaluation
 	Model 16: 		MSE only
 
 	Model 17: 		cos only
+	
+	Model 18:		angular distance instead of cosine distance

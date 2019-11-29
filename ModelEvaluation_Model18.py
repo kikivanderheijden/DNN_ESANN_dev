@@ -19,9 +19,10 @@ import pandas
 import pickle
 
 os.chdir(dirscripts)
+from CustLoss_MSE import cust_mean_squared_error
 from ModelPredictions import generate_model_predictions
-from CustLoss_cosine_distance_angular import cos_dist_2D_angular # note that in this loss function, the axis of the MSE is set to 1
-from CustMet_cosine_distance import cos_distmet_2D
+from CustLoss_cosine_distance_angular import cos_dist_2D_angular
+from CustMet_cosine_distance_angular import cos_distmet_2D_angular
 
 
 # define name of current model
@@ -38,7 +39,7 @@ azimuthrange = np.arange(0,360,10)
 #------------------------------------------------------------------------------
 
 # load model
-model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cos_dist_2D_angular": cos_dist_2D_angular, "cos_distmet_2D": cos_distmet_2D})
+model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_angular": cos_dist_2D_angular, "cos_distmet_2D_angular": cos_distmet_2D_angular})
 
 # load history of the model
 hist = pandas.read_csv(dirfiles+"/history_"+modelname+".csv")
@@ -69,7 +70,11 @@ elif newpredictions == 0:
     predictions = np.load(dirfiles+"/predictions_"+modelname+".npy")
         
 # evaluate the model on unseen data (shouldn't be test data)
-score = model.evaluate(X_test, Y_test, verbose=1)
+score = model.evaluate(X_test, Y_test, verbose=1) # note that the cosine distance computation is wrong and cannot be used,
+# should use the cosine_distance_degrees average instead
+
+# this was used to check whether the model predictions match the model evaluation. 
+#cos_sim = np.sum(Y_test*predictions, axis=1)/(np.sqrt(np.sum(np.square(Y_test),axis=1))*np.sqrt(np.sum(np.square(predictions),axis=1)))
 
 #------------------------------------------------------------------------------
 # Analyze predictions
