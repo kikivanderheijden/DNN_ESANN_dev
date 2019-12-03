@@ -100,3 +100,5 @@ Formal model evaluation
 	Model 17: 		cos only
 	
 	Model 18:		angular distance instead of cosine distance
+	
+	Model 19: 		Same as model 18, redone because model 18 crashed --> timing start Mon 2019_12_02 11:43

@@ -12,7 +12,7 @@ dirfiles = r'C:\Users\kiki.vanderheijden\Documents\PYTHON\DNN_ESANN'
 
 # specify model names
 #models = ['model11','model13','model15', 'model16']
-models = ['model16','model18']
+models = ['model16','model19']
 
 # set azimuth range
 azimuthrange = np.arange(0,360,10)
@@ -79,14 +79,16 @@ for w in range(dims_matrix_cosdist[0]):
         mean_cosdistdeg_env[w,x] = np.mean(np.squeeze(cosine_distance_degrees[w,np.where(names_val_env==env_range[x])]))
         stdev_cosdistdeg_env[w,x] = np.std(np.squeeze(cosine_distance_degrees[w,np.where(names_val_env==env_range[x])]))
 
-# now you want to compute the cosine distance as a function of azimuth and env
-mean_cosdistdeg_az_env = np.empty([dims_matrix_cosdist[0],len(azimuthrange)])
-stdev_cosdistdeg_az_env = np.empty([dims_matrix_cosdist[0],len(azimuthrange)])
-for w in range(dims_matrix_cosdist[0]):
-    for wx in range(len(env_range)):
-        for x in range(len(azimuthrange)):
-            mean_cosdistdeg_az_env[w,wx,x] = np.mean(np.squeeze(cosine_distance_degrees[w,np.where(names_val_angle==azimuthrange[x] and names_val_env==env_range[wx])]))
-            stdev_cosdistdeg_az_env[w,wx,x] = np.std(np.squeeze(cosine_distance_degrees[w,np.where(names_val_angle==azimuthrange[x]) and np.where(names_val_env==env_range[wx])]))
+# =============================================================================
+# # now you want to compute the cosine distance as a function of azimuth and env
+# mean_cosdistdeg_az_env = np.empty([dims_matrix_cosdist[0],len(azimuthrange)])
+# stdev_cosdistdeg_az_env = np.empty([dims_matrix_cosdist[0],len(azimuthrange)])
+# for w in range(dims_matrix_cosdist[0]):
+#     for wx in range(len(env_range)):
+#         for x in range(len(azimuthrange)):
+#             mean_cosdistdeg_az_env[w,wx,x] = np.mean(np.squeeze(cosine_distance_degrees[w,np.where(names_val_angle==azimuthrange[x] and names_val_env==env_range[wx])]))
+#             stdev_cosdistdeg_az_env[w,wx,x] = np.std(np.squeeze(cosine_distance_degrees[w,np.where(names_val_angle==azimuthrange[x]) and np.where(names_val_env==env_range[wx])]))
+# =============================================================================
   
 # compute mean and standard deviation of error per target azimuth location
 mean_prediction = np.empty([len(models),len(azimuthrange),2])
@@ -112,6 +114,7 @@ for w in range(len(models)):
             preddeg = 180+np.abs(np.arcsin(mean_prediction[w,x,0]/np.sqrt(np.square(mean_prediction[w,x,0])+np.square(mean_prediction[w,x,1]))))*180/np.pi
         elif tempx< 0 and tempy >=0:
             preddeg = 360+np.arcsin(mean_prediction[w,x,0]/np.sqrt(np.square(mean_prediction[w,x,0])+np.square(mean_prediction[w,x,1])))*180/np.pi
+        mean_predangles[w,x] = preddeg
 
 # label per location (complicated way of retrieving it but OK)
 mean_label = np.empty([len(azimuthrange),2])
@@ -170,7 +173,7 @@ ax.set_yticklabels([])
 ax.grid(linewidth = .75, linestyle = ':')
 c = ax.scatter(np.radians(theta_pred), r_pred, c = colors_pred, cmap = 'jet')
 c = ax.scatter(np.radians(theta_true), r_true, marker = '^', c = colors_true, cmap = 'jet', alpha = 1)
-plt.savefig(dirfiles+'/plot_ESANN_polar_trueandpredicted_modelMSE.eps')    
+plt.savefig(dirfiles+'/plot_ESANN_polar_trueandpredicted_modelMSE_m16.eps')    
 
 # model 2
 theta_pred = np.squeeze(mean_predangles[1,])
@@ -189,36 +192,42 @@ ax.set_yticklabels([])
 ax.grid(linewidth = .75, linestyle = ':')
 c = ax.scatter(np.radians(theta_pred), r_pred, c = colors_pred, cmap = 'jet')
 c = ax.scatter(np.radians(theta_true), r_true, marker = '^', c = colors_true, cmap = 'jet', alpha = 1)
-plt.savefig(dirfiles+'/plot_ESANN_polar_trueandpredicted_modelAD.eps')    
+plt.savefig(dirfiles+'/plot_ESANN_polar_trueandpredicted_modelAD_m19.eps')    
 
 ### create a boxplot of the mean error per environment
 flierspecs = dict(marker = '+', markersize = 2)
 data_model1 = [np.squeeze(cosine_distance_degrees[0,np.where(names_val_env==0)]),np.squeeze(cosine_distance_degrees[0,np.where(names_val_env==1)])]
 data_model2 = [np.squeeze(cosine_distance_degrees[1,np.where(names_val_env==0)]),np.squeeze(cosine_distance_degrees[1,np.where(names_val_env==1)])]
-plt.figure()
+plt.figure(figsize=[10,6])
 box1 = plt.boxplot(data_model1, positions=[1,1.5], flierprops = flierspecs, notch=True, patch_artist=True)
 box2 = plt.boxplot(data_model2, positions=[2,2.5], flierprops = flierspecs,notch=True, patch_artist=True)
 # change face color of model 1
 for box in box1['boxes']:
     box.set(facecolor='green')
-plt.ylabel('Angular distance (degrees)')
-plt.xticks([1, 1.5, 2, 2.5],['Anechoic','Hall','Anechoic','Hall'])
-plt.legend([box1["boxes"][0], box2["boxes"][0]], ['MSE', 'AD'], loc='upper right')
-plt.savefig(dirfiles+'/plot_ESANN_box_predictionerror_perenvironment.eps')
+plt.ylabel('Angular distance (degrees)', fontsize = 12)
+plt.yticks(fontsize = 12)
+plt.xticks([1, 1.5, 2, 2.5],['Anechoic','Hall','Anechoic','Hall'],fontsize = 12)
+plt.legend([box1["boxes"][0], box2["boxes"][0]], ['MSE', 'AD'], loc='upper right', fontsize = 12)
+plt.savefig(dirfiles+'/plot_ESANN_box_predictionerror_perenvironment_m16_m19.eps')
 
 
 ### create boxplot of mean error per azimuth position
-plt.figure()
+plt.figure(figsize=[10,6])
 data_model1_az = np.squeeze(mean_cosdistdeg_az[0,])
 sem_model1_az = sem_cosdistdeg_az[0,]
 data_model2_az = np.squeeze(mean_cosdistdeg_az[1,])
 sem_model2_az = sem_cosdistdeg_az[1,]
 
 idx = [18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
-plt.errorbar(np.linspace(1,36,36),data_model1_az[idx],yerr=sem_model1_az[idx],fmt= 'o')
-plt.errorbar(np.linspace(1.2,36.2,36),data_model2_az[idx],yerr=sem_model2_az[idx],fmt= 'o')
-plt.xticks(np.linspace(1,36,18),('180','200','220','240','260','280','300','320','340','0','20','40','60','80','100','120','140','160'),rotation=90)
-
+plt.errorbar(np.linspace(1,36,36),data_model1_az[idx],yerr=sem_model1_az[idx],fmt= 'o', alpha = .5)
+plt.errorbar(np.linspace(1,36,36),data_model2_az[idx],yerr=sem_model2_az[idx],fmt= 'o', alpha = .5)
+plt.xticks(np.linspace(1,36,18),('180','200','220','240','260','280','300','320','340','0','20','40','60','80','100','120','140','160'),rotation=60,fontsize = 12)
+plt.yticks(fontsize = 12)
+plt.legend(['MSE', 'AD'], loc='upper right', fontsize = 12)
+plt.xlabel('Target azimuth position (degrees)', fontsize = 12)
+plt.ylabel('Angular distance (degrees)', fontsize = 12)
+plt.grid(linestyle = ':', alpha = .7)
+plt.savefig(dirfiles+'/plot_ESANN_angulardistance_perazimuth_bothmodels_m16_m19.eps')
 #-----------------------------------------------------------------------------
 # OLD CODE
 #-----------------------------------------------------------------------------
