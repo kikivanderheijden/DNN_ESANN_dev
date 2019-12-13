@@ -63,14 +63,14 @@ Y_test = labels_val
 #------------------------------------------------------------------------------
 
 # predict --> create predictions (set to 1) or load predictions (set to 0)
-newpredictions = 1
+newpredictions = 0
 if newpredictions == 1:
     predictions = generate_model_predictions(model, X_test, modelname, dirfiles, sizebatches)
 elif newpredictions == 0:
     predictions = np.load(dirfiles+"/predictions_"+modelname+".npy")
         
 # evaluate the model on unseen data (shouldn't be test data)
-score = model.evaluate(X_test, Y_test, verbose=1) # note that the cosine distance computation is wrong and cannot be used,
+score = model.evaluate(X_test, Y_test, verbose=1) # !!!! note that the cosine distance computation is wrong and cannot be used,
 # should use the cosine_distance_degrees average instead
 
 # this was used to check whether the model predictions match the model evaluation. 
@@ -157,12 +157,16 @@ color4 = (0.35,0.5,0.98)
 plt.figure()
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck1),0],predictions[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck1),0],labels_val[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),1]),color=color1, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck2),0],predictions[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck2),0],labels_val[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),1]),color=color2, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck3),0],predictions[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck3),0],labels_val[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),1]),color=color3, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck4),0],predictions[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck4),0],labels_val[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),1]),color=color4, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.axis('square')
 plt.xlabel('x-coordinate',fontsize=15)
 plt.ylabel('y-coordinate',fontsize=15)
@@ -182,12 +186,16 @@ color4 = (1,0,0)
 plt.figure()
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck1),0],predictions[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck1),0],labels_val[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),1]),color=color1, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck2),0],predictions[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck2),0],labels_val[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),1]),color=color2, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck3),0],predictions[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck3),0],labels_val[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),1]),color=color3, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck4),0],predictions[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck4),0],labels_val[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
+plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),1]),color=color4, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.axis('square')
 plt.xlabel('x-coordinate',fontsize=15)
 plt.ylabel('y-coordinate',fontsize=15)
@@ -236,10 +244,10 @@ c = ax.scatter(np.radians(theta), r)
 plt.figure()
 plt.plot(hist.loss)
 plt.plot(hist.val_loss)
-plt.title("model loss and metrics")
+plt.title("Model 19: Training and validation loss")
 plt.ylabel("loss")
 plt.xlabel("epoch")
-plt.legend(["train loss", "val loss", "train MSE", "val MSE", "train cos dist", "val cos dist"], loc="upper right")
+plt.legend(["train loss", "val loss"], loc="upper right")
 plt.show()
 
 plt.figure()

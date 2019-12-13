@@ -52,7 +52,7 @@ with os.scandir(dir_anfiles) as listfiles:
 # add together in 2D array where column 1 = x coord and column 2 = y coord
 trainlabels = np.vstack((np.array(trainlabels_x),np.array(trainlabels_y)))
 trainlabels = np.transpose(trainlabels)
-
+ 
 t.toc("creating the train labels took")
 print("shape of training labels is ", trainlabels.shape)    
 

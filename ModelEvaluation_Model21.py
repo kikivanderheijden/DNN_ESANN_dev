@@ -21,11 +21,14 @@ import pickle
 os.chdir(dirscripts)
 from CustLoss_MSE import cust_mean_squared_error
 from ModelPredictions import generate_model_predictions
-from CustMet_cosine_distance import cos_distmet_2D
+from CustLoss_cosine_distance_angular import cos_dist_2D_angular
+from CustMet_cosine_distance_angular import cos_distmet_2D_angular
+from CustLoss_Combined_CosineAngular_MSE_weighed2 import cos_dist_angular_and_mse_weighed2 # note that in this loss function, the axis of the MSE is set to 1
+
 
 
 # define name of current model
-modelname = "model16"
+modelname = "model21"
 
 # model parameters for evaluation
 sizebatches = 128
@@ -38,7 +41,7 @@ azimuthrange = np.arange(0,360,10)
 #------------------------------------------------------------------------------
 
 # load model
-model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_distmet_2D": cos_distmet_2D})
+model = load_model(dirfiles+'/'+modelname+'_final.h5', custom_objects={"cust_mean_squared_error": cust_mean_squared_error, "cos_dist_2D_angular": cos_dist_2D_angular, "cos_distmet_2D_angular": cos_distmet_2D_angular, "cos_dist_angular_and_mse_weighed2": cos_dist_angular_and_mse_weighed2})
 
 # load history of the model
 hist = pandas.read_csv(dirfiles+"/history_"+modelname+".csv")
@@ -156,16 +159,12 @@ color4 = (0.35,0.5,0.98)
 plt.figure()
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck1),0],predictions[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck1),0],labels_val[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),1]),color=color1, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck2),0],predictions[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck2),0],labels_val[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),1]),color=color2, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck3),0],predictions[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck3),0],labels_val[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),1]),color=color3, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck4),0],predictions[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck4),0],labels_val[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),1]),color=color4, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.axis('square')
 plt.xlabel('x-coordinate',fontsize=15)
 plt.ylabel('y-coordinate',fontsize=15)
@@ -185,16 +184,12 @@ color4 = (1,0,0)
 plt.figure()
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck1),0],predictions[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck1),0],labels_val[np.squeeze(names_val_angle==anglecheck1),1],color=color1, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck1),1]),color=color1, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck2),0],predictions[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck2),0],labels_val[np.squeeze(names_val_angle==anglecheck2),1],color=color2, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck2),1]),color=color2, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck3),0],predictions[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck3),0],labels_val[np.squeeze(names_val_angle==anglecheck3),1],color=color3, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck3),1]),color=color3, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.scatter(predictions[np.squeeze(names_val_angle==anglecheck4),0],predictions[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=0.4)
 plt.scatter(labels_val[np.squeeze(names_val_angle==anglecheck4),0],labels_val[np.squeeze(names_val_angle==anglecheck4),1],color=color4, alpha=.5, marker = "X",s=100, edgecolors="k",linewidth=1)
-plt.scatter(np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),0]),np.mean(predictions[np.squeeze(names_val_angle==anglecheck4),1]),color=color4, alpha=1, marker = "o",s=100, edgecolors="k",linewidth=1)
 plt.axis('square')
 plt.xlabel('x-coordinate',fontsize=15)
 plt.ylabel('y-coordinate',fontsize=15)
@@ -243,7 +238,7 @@ c = ax.scatter(np.radians(theta), r)
 plt.figure()
 plt.plot(hist.loss)
 plt.plot(hist.val_loss)
-plt.title("Model 16: Training and validation loss")
+plt.title("Model 21: Training and validation loss")
 plt.ylabel("loss")
 plt.xlabel("epoch")
 plt.legend(["train loss", "val loss"], loc="upper right")
